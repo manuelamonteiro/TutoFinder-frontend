@@ -11,8 +11,7 @@ export default function SignUpPage() {
         email: "",
         password: "",
         confirmPassword: "",
-        username: "",
-        image: ""
+        name: ""
     });
 
     function handleForm(e) {
@@ -26,22 +25,14 @@ export default function SignUpPage() {
             <AuthForm>
                 <form>
                     <input
-                        name="username"
-                        value={form.username}
+                        name="name"
+                        value={form.name}
                         onChange={handleForm}
                         type="text"
                         required
                         placeholder="nome"
                     />
 
-                    <input
-                        name="image"
-                        value={form.pictureUrl}
-                        onChange={handleForm}
-                        type="url"
-                        required
-                        placeholder="imagem"
-                    />
                     <input
                         type="email"
                         name="email"
@@ -84,7 +75,6 @@ const ScreenCointaner = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #00CED1;
 
     h2{
         font-family: 'Raleway', sans-serif; ;

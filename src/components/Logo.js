@@ -12,7 +12,6 @@ const LogoContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    justify-content: center;
 
     h1{
         font-family: 'Saira Stencil One', cursive;

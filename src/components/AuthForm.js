@@ -54,7 +54,7 @@ const FormContainer = styled.div`
         font-weight: 700;
         font-size: 27px;
         line-height: 40px;
-        background: #40E0D0;
+        background-color: lightgray;
         cursor: pointer;
     }
 
