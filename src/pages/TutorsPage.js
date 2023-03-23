@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 import Header from "../components/Header";
 
@@ -25,7 +26,7 @@ export default function TutorsPage() {
     },
     {
         name: "Jungkook",
-        picture: "https://i.pinimg.com/originals/f5/24/e1/f524e1f6b54343107fb85d805f4d73f9.jpg",
+        picture: "https://i.pinimg.com/originals/49/15/d1/4915d18d1de6c9c11694fc9d3492e4de.jpg",
         price: 100
     }
     ]
@@ -41,10 +42,12 @@ export default function TutorsPage() {
                     {tutors.map((t) => (
                         <TutorCard>
                             <img src={t.picture} />
-                            <TutorInfo>
+                            <TutorName>
                                 <p>{t.name}</p>
-                                <p>R${t.price},00/hora</p>
-                            </TutorInfo>
+                            </TutorName>
+                            <TutorPrice>
+                            <p>R${t.price},00/hora</p>
+                            </TutorPrice>
                         </TutorCard>
                     ))}
                 </TutorsContainer>
@@ -85,8 +88,8 @@ const ScreenCointaner = styled.div`
 const TutorsContainer = styled.div`
     width: 100%;
     display: grid;
-    margin-top: 30px;
-    padding-bottom: 20px;
+    margin-top: 50px;
+    padding-bottom: 40px;
     grid-template-columns: repeat(4, 220px);
     justify-content: center;
     align-items: center;
@@ -107,36 +110,39 @@ const TutorsContainer = styled.div`
 `;
 
 const TutorCard = styled.div`
-    height: 100%;
+    height: 120%;
     display: flex;
     flex-direction: column;
-    background-color: #DCDCDC;
-    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background: -webkit-gradient(linear, left top, left bottom, from(black), to(#DCDCDC));
+    border-radius: 50px;
 
     img{
-        width: 220px;
-        border-radius: 10px 10px 0 0;
+        width: 100px;
+        border-radius: 100px;
 
         @media(max-width: 1150px) {
-            width: 210px;
+            width: 90px;
         }
 
         @media(max-width: 800px) {
-            width: 200px;
+            width: 80px;
         }
 
         @media(max-width: 550px) {
-            width: 180px;
+            width: 70px;
         }
     }
 `;
 
-const TutorInfo = styled.div`
+const TutorName = styled.div`
         margin-top: 5px;
         padding-left: 5px;
         margin-bottom: 5px;
+
     p{
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 20px;
@@ -146,5 +152,15 @@ const TutorInfo = styled.div`
         @media(max-width: 1150px) {
             font-size: 18px;
         }
+    }
+`;
+
+const TutorPrice = styled.div`
+    p{
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
     }
 `;
