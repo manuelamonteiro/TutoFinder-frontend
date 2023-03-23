@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 import Logo from "../components/Logo";
 import AuthForm from "../components/AuthForm";

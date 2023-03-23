@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import {BiArrowFromLeft} from "react-icons/bi";
+import { BiArrowFromLeft } from "react-icons/bi";
 
 export default function Header() {
     return (
         <LogoContainer>
             <h1>TutoFinder</h1>
-            <BiArrowFromLeft size="32px" color="white"/>
+            <BiArrowFromLeft size="32px" color="white" />
         </LogoContainer>
     );
 }

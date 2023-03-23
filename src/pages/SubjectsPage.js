@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { toast } from "react-toastify";
+
 import Header from "../components/Header";
 
 export default function SubjectsPage() {
@@ -15,7 +17,10 @@ export default function SubjectsPage() {
         "História",
         "Filosofia",
         "Sociologia",
-        "Biologia"
+        "Biologia",
+        "Artes",
+        "Música",
+        "Desenho Técnico"
     ];
 
     return (
@@ -45,11 +50,15 @@ const ScreenCointaner = styled.div`
 
     h2{
         margin-top: 50px;
-        font-family: 'Raleway', sans-serif; ;
+        font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: 700;
         font-size: 28px;
         line-height: 24px;
+
+        @media(max-width: 1150px) {
+            font-size: 26px;
+        }
 
         @media(max-width: 800px) {
             font-size: 22px;
@@ -65,11 +74,15 @@ const SubjectsContainer = styled.div`
     width: 100%;
     display: grid;
     margin-top: 50px;
-    grid-template-columns: repeat(3, 240px);
+    grid-template-columns: repeat(4, 240px);
     justify-content: center;
     align-items: center;
     column-gap: 15px;
     row-gap: 12px;
+
+    @media(max-width: 1150px) {
+        grid-template-columns: repeat(3, 240px);
+    }
 
     @media(max-width: 800px) {
         grid-template-columns: repeat(2, 240px);
@@ -87,6 +100,10 @@ const SubjectsContainer = styled.div`
         font-size: 22px;
         line-height: 24px;
 
+        @media(max-width: 1150px) {
+            font-size: 20px;
+        }
+
         @media(max-width: 800px) {
             font-size: 16px;
         }
@@ -101,7 +118,7 @@ const Subject = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: lightgray;
+    background-color: #DCDCDC;
     height: 60px;
     border-radius: 10px;
 `;
