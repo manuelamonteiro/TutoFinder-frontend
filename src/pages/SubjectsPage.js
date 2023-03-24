@@ -1,27 +1,28 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
 import Header from "../components/Header";
+import { getSubjects } from "../services/subjectsApi";
+import SubjectComponent from "../components/SubjectComponent";
 
 export default function SubjectsPage() {
     const navigate = useNavigate();
+    const [subjects, setSubjects] = useState([]);
+    const { subjectId } = useParams();
 
-    const subjects = [
-        "Português",
-        "Matemática",
-        "Física",
-        "Química",
-        "Geografia",
-        "História",
-        "Filosofia",
-        "Sociologia",
-        "Biologia",
-        "Artes",
-        "Música",
-        "Desenho Técnico"
-    ];
+    useEffect(() => {
+        async function fetchData(){
+            const subjects = await getSubjects(subjectId);
+            if(subjects.length === 0){
+                toast("Erro inesperado!");
+            }
+            setSubjects(subjects);
+        }
+
+        fetchData();
+    }, []);
 
     return (
         <>
@@ -33,7 +34,10 @@ export default function SubjectsPage() {
 
                 <SubjectsContainer>
                     {subjects.map((s) => (
-                        <Subject><p>{s}</p></Subject>
+                        <SubjectComponent
+                            name={s.name}
+                            key={s.id}
+                        />
                     ))}
                 </SubjectsContainer>
             </ScreenCointaner >
