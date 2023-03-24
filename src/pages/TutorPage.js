@@ -17,6 +17,7 @@ export default function TutorPage() {
             if (tutor.length === 0) {
                 toast("Erro inesperado!");
             }
+            console.log(tutor)
             setTutor(tutor);
         }
 
@@ -37,7 +38,7 @@ export default function TutorPage() {
                 </TutorPicture>
                 <TutorInfo>
                     <p><strong><big><big>Nome:</big></big></strong> {tutor.name}</p><br></br>
-                    <p><strong><big><big>Preço:</big></big></strong> R${tutor.price},00/hora</p><br></br>
+                    <p><strong><big><big>Preço:</big></big></strong> R${tutor.pricePerHour},00/hora</p><br></br>
                     <p><strong><big><big>Descrição:</big></big></strong> {tutor.description}</p><br></br>
                     <h2 onClick={() => sendMessage()}>Dúvidas? Fale comigo!</h2>
                 </TutorInfo>
