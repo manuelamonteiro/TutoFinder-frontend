@@ -17,7 +17,6 @@ export default function TutorPage() {
             if (tutor.length === 0) {
                 toast("Erro inesperado!");
             }
-            console.log(tutor)
             setTutor(tutor);
         }
 
