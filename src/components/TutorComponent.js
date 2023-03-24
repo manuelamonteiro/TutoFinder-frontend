@@ -8,29 +8,36 @@ export default function TutorComponent({ name, price, picture }) {
         <>
             <TutorCard>
                 <img src={picture} />
-                <TutorName>
+                <TutorInfo>
                     <p>{name}</p>
-                </TutorName>
-                <TutorPrice>
                     <p>R${price},00/hora</p>
-                </TutorPrice>
+                </TutorInfo>
             </TutorCard>
         </>
     )
 }
 
 const TutorCard = styled.div`
-    height: 120%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 250px;
     align-items: center;
-    background: -webkit-gradient(linear, left top, left bottom, from(black), to(#DCDCDC));
-    border-radius: 50px;
+    background: -webkit-gradient(linear, left top, left bottom, from(black), to(#C0C0C0));
+    border-radius: 20px;
+
+    @media(max-width: 1150px) {
+            width: 220px;
+        }
+
+        @media(max-width: 800px) {
+            width: 205px;
+        }
+
+        @media(max-width: 550px) {
+            width: 195px;
+        }
 
     img{
-        width: 100px;
-        border-radius: 100px;
+        width: 110px;
 
         @media(max-width: 1150px) {
             width: 90px;
@@ -46,31 +53,14 @@ const TutorCard = styled.div`
     }
 `;
 
-const TutorName = styled.div`
-        margin-top: 5px;
-        padding-left: 5px;
-        margin-bottom: 5px;
-
-    p{
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 24px;
-        margin-top: 5px;
-
-        @media(max-width: 1150px) {
-            font-size: 18px;
-        }
-    }
-`;
-
-const TutorPrice = styled.div`
+const TutorInfo = styled.div`
+    padding-left: 10px;
     p{
         font-family: 'Roboto', sans-serif;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 500;
         font-size: 16px;
         line-height: 24px;
+        color: #D3D3D3;
     }
 `;

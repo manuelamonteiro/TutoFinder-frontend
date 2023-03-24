@@ -83,18 +83,21 @@ const TutorsContainer = styled.div`
     grid-template-columns: repeat(4, 220px);
     justify-content: center;
     align-items: center;
-    column-gap: 25px;
-    row-gap: 50px;
+    column-gap: 50px;
+    row-gap: 30px;
 
     @media(max-width: 1150px) {
         grid-template-columns: repeat(3, 210px);
+        column-gap: 25px;
     }
 
     @media(max-width: 800px) {
         grid-template-columns: repeat(2, 200px);
+        column-gap: 25px;
     }
 
     @media(max-width: 550px) {
         grid-template-columns: repeat(1, 180px);
+        column-gap: 25px;
     }
 `;
