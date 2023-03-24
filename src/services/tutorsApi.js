@@ -7,7 +7,7 @@ export async function getTutorsBySubject(subjectId) {
 }
 
 export async function getTutorInfo(tutorId) {
-    const res = await api.get(`/tutors/${tutorId}`);
+    const res = await api.get(`/tutor/${tutorId}`);
 
     return res.data;
 }
