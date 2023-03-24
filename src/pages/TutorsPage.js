@@ -1,34 +1,28 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
 import Header from "../components/Header";
+import { getTutorsBySubject } from "../services/tutorsApi";
+import TutorComponent from "../components/TutorComponent";
 
 export default function TutorsPage() {
     const navigate = useNavigate();
+    const [tutors, setTutors] = useState([]);
+    const { subjectId } = useParams();
 
-    const tutors = [{
-        name: "Jungkook",
-        picture: "https://i.pinimg.com/originals/f5/24/e1/f524e1f6b54343107fb85d805f4d73f9.jpg",
-        price: 100
-    },
-    {
-        name: "Jungkook",
-        picture: "https://i.pinimg.com/originals/f5/24/e1/f524e1f6b54343107fb85d805f4d73f9.jpg",
-        price: 100
-    },
-    {
-        name: "Jungkook",
-        picture: "https://i.pinimg.com/originals/f5/24/e1/f524e1f6b54343107fb85d805f4d73f9.jpg",
-        price: 100
-    },
-    {
-        name: "Jungkook",
-        picture: "https://i.pinimg.com/originals/49/15/d1/4915d18d1de6c9c11694fc9d3492e4de.jpg",
-        price: 100
-    }
-    ]
+    useEffect(() => {
+        async function fetchData() {
+            const tutors = await getTutorsBySubject(subjectId);
+            if (tutors.length === 0) {
+                toast("Não temos tutores dessa disciplina ainda :(");
+            }
+            setTutors(tutors);
+        }
+
+        fetchData();
+    }, []);
 
     return (
         <>
@@ -39,15 +33,12 @@ export default function TutorsPage() {
                 </h2>
                 <TutorsContainer>
                     {tutors.map((t) => (
-                        <TutorCard>
-                            <img src={t.picture} />
-                            <TutorName>
-                                <p>{t.name}</p>
-                            </TutorName>
-                            <TutorPrice>
-                            <p>R${t.price},00/hora</p>
-                            </TutorPrice>
-                        </TutorCard>
+                        <TutorComponent
+                            key={t.id}
+                            name={t.name}
+                            price={t.pricePerHour}
+                            picture={t.picture}
+                        />
                     ))}
                 </TutorsContainer>
             </ScreenCointaner >
@@ -105,61 +96,5 @@ const TutorsContainer = styled.div`
 
     @media(max-width: 550px) {
         grid-template-columns: repeat(1, 180px);
-    }
-`;
-
-const TutorCard = styled.div`
-    height: 120%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: -webkit-gradient(linear, left top, left bottom, from(black), to(#DCDCDC));
-    border-radius: 50px;
-
-    img{
-        width: 100px;
-        border-radius: 100px;
-
-        @media(max-width: 1150px) {
-            width: 90px;
-        }
-
-        @media(max-width: 800px) {
-            width: 80px;
-        }
-
-        @media(max-width: 550px) {
-            width: 70px;
-        }
-    }
-`;
-
-const TutorName = styled.div`
-        margin-top: 5px;
-        padding-left: 5px;
-        margin-bottom: 5px;
-
-    p{
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 24px;
-        margin-top: 5px;
-
-        @media(max-width: 1150px) {
-            font-size: 18px;
-        }
-    }
-`;
-
-const TutorPrice = styled.div`
-    p{
-        font-family: 'Roboto', sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
     }
 `;

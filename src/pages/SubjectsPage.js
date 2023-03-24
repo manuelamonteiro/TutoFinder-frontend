@@ -10,12 +10,11 @@ import SubjectComponent from "../components/SubjectComponent";
 export default function SubjectsPage() {
     const navigate = useNavigate();
     const [subjects, setSubjects] = useState([]);
-    const { subjectId } = useParams();
 
     useEffect(() => {
-        async function fetchData(){
-            const subjects = await getSubjects(subjectId);
-            if(subjects.length === 0){
+        async function fetchData() {
+            const subjects = await getSubjects();
+            if (subjects.length === 0) {
                 toast("Erro inesperado!");
             }
             setSubjects(subjects);
@@ -116,13 +115,4 @@ const SubjectsContainer = styled.div`
             font-size: 14px;
         }
     }
-`;
-
-const Subject = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #DCDCDC;
-    height: 60px;
-    border-radius: 10px;
 `;
