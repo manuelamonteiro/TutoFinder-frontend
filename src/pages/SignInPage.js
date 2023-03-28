@@ -1,41 +1,51 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
 import Logo from "../components/Logo";
 import AuthForm from "../components/AuthForm";
+import { signIn } from "../services/userApi";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function SignInPage() {
     const navigate = useNavigate();
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-    });
+    const { setConfig, config } = useContext(AuthContext);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    function handleForm(e) {
-        const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
+    async function submit(event) {
+        event.preventDefault();
+
+        try {
+            const userData = await signIn(email, password);
+            setConfig(userData.token);
+            localStorage.setItem("token", userData.token);
+            toast('Login realizado com sucesso!');
+            navigate('/subjects');
+        } catch (err) {
+            toast('Não foi possível fazer o login!');
+        }
     }
 
     return (
         <ScreenCointaner>
             <Logo />
             <AuthForm>
-                <form>
+                <form onSubmit={submit}>
                     <input
                         type="email"
                         name="email"
-                        value={form.email}
-                        onChange={handleForm}
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                         placeholder="e-mail"
                         required
                     />
 
                     <input
                         name="password"
-                        value={form.password}
-                        onChange={handleForm}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                         type="password"
                         required
                         placeholder="senha"
@@ -56,6 +66,7 @@ const ScreenCointaner = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #F5F5F5;
 
     h2{
         font-family: 'Raleway', sans-serif; ;

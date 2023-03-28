@@ -1,18 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function TutorComponent({ name, price, picture }) {
-    const navigate = useNavigate();
+export default function TutorComponent({ name, price, picture, id }) {
 
     return (
         <>
-            <TutorCard>
-                <img src={picture} />
-                <TutorInfo>
-                    <p>{name}</p>
-                    <p>R${price},00/hora</p>
-                </TutorInfo>
-            </TutorCard>
+            <Link to={`/tutor/${id}`}>
+                <TutorCard>
+                    <img src={picture} />
+                    <TutorInfo>
+                        <p>{name}</p>
+                        <p>R${price},00/hora</p>
+                    </TutorInfo>
+                </TutorCard>
+            </Link>
         </>
     )
 }
@@ -22,7 +23,6 @@ const TutorCard = styled.div`
     width: 250px;
     align-items: center;
     background: -webkit-gradient(linear, left top, left bottom, from(black), to(#C0C0C0));
-    border-radius: 20px;
 
     @media(max-width: 1150px) {
             width: 220px;

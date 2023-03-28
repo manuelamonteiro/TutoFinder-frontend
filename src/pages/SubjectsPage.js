@@ -1,19 +1,20 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
 import Header from "../components/Header";
 import { getSubjects } from "../services/subjectsApi";
 import SubjectComponent from "../components/SubjectComponent";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function SubjectsPage() {
-    const navigate = useNavigate();
+    const { config: token } = useContext(AuthContext);
     const [subjects, setSubjects] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
-            const subjects = await getSubjects();
+            const subjects = await getSubjects(token);
             if (subjects.length === 0) {
                 toast("Erro inesperado!");
             }
@@ -36,6 +37,7 @@ export default function SubjectsPage() {
                         <SubjectComponent
                             name={s.name}
                             key={s.id}
+                            id={s.id}
                         />
                     ))}
                 </SubjectsContainer>
@@ -50,6 +52,7 @@ const ScreenCointaner = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 50px;
+    background-color: #F5F5F5;
 
     h2{
         margin-top: 50px;

@@ -1,20 +1,21 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
 import Header from "../components/Header";
 import { getTutorsBySubject } from "../services/tutorsApi";
 import TutorComponent from "../components/TutorComponent";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function TutorsPage() {
-    const navigate = useNavigate();
+    const { config: token } = useContext(AuthContext);
     const [tutors, setTutors] = useState([]);
     const { subjectId } = useParams();
 
     useEffect(() => {
         async function fetchData() {
-            const tutors = await getTutorsBySubject(subjectId);
+            const tutors = await getTutorsBySubject(subjectId, token);
             if (tutors.length === 0) {
                 toast("Não temos tutores dessa disciplina ainda :(");
             }
@@ -38,6 +39,7 @@ export default function TutorsPage() {
                             name={t.name}
                             price={t.pricePerHour}
                             picture={t.picture}
+                            id={t.id}
                         />
                     ))}
                 </TutorsContainer>
@@ -48,10 +50,12 @@ export default function TutorsPage() {
 
 const ScreenCointaner = styled.div`
     width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 50px;
+    background-color: #F5F5F5;
 
     h2{
         margin-top: 50px;
