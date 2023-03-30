@@ -15,11 +15,12 @@ export default function TutorsPage() {
 
     useEffect(() => {
         async function fetchData() {
-            const tutors = await getTutorsBySubject(subjectId, token);
-            if (tutors.length === 0) {
-                toast("Não temos tutores dessa disciplina ainda :(");
+            try {
+                const tutors = await getTutorsBySubject(subjectId, token);
+                setTutors(tutors);
+            } catch (error) {
+                toast("Não existem tutores dessa disciplina ainda.")
             }
-            setTutors(tutors);
         }
 
         fetchData();

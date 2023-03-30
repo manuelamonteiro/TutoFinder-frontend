@@ -13,15 +13,18 @@ export default function TutorPage() {
     const { config: token } = useContext(AuthContext);
     const { tutorId } = useParams();
     const [tutor, setTutor] = useState({});
+    const [emptyPage, setEmptyPage] = useState(false);
     const [showPayment, setShowPayment] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
-            const tutor = await getTutorInfo(tutorId, token);
-            if (tutor.length === 0) {
+            try {
+                const tutor = await getTutorInfo(tutorId, token);
+                setTutor(tutor);
+            } catch (error) {
                 toast("Erro inesperado!");
+                setEmptyPage(true);
             }
-            setTutor(tutor);
         }
 
         fetchData();
@@ -42,30 +45,35 @@ export default function TutorPage() {
     }
 
     return (
-        <ScreenContainer>
-            <Header />
-            <TutorCointaner>
-                <TutorPicture>
-                    <img src={tutor.picture} />
-                </TutorPicture>
-                <TutorInfo>
-                    <p><strong><big><big>Nome:</big></big></strong> {tutor.name}</p><br></br>
-                    <p><strong><big><big>Preço:</big></big></strong> R${tutor.pricePerHour},00/hora</p><br></br>
-                    <p><strong><big><big>Descrição:</big></big></strong> {tutor.description}</p><br></br>
-                    <h2 onClick={() => sendMessage()}>Dúvidas? Fale comigo!</h2>
-                </TutorInfo>
-            </TutorCointaner >
-            <BookingAndPaymentContainer>
-                <BookingContainer>
-                    <h2>Primeira vez? Agende duas horas de aula e pague apenas uma!</h2>
-                    <BookingButton onClick={() => bookClass()}><h2>AGENDAR AULA</h2></BookingButton>
-                </BookingContainer>
-                {showPayment ?
-                    <PaymentContainer>
-                        <PaymentComponent />
-                    </PaymentContainer> : ""}
-            </BookingAndPaymentContainer>
-        </ScreenContainer>
+        (!emptyPage ?
+            (<ScreenContainer>
+                <Header />
+                <TutorCointaner>
+                    <TutorPicture>
+                        <img src={tutor.picture} />
+                    </TutorPicture>
+                    <TutorInfo>
+                        <p><strong><big><big>Nome:</big></big></strong> {tutor.name}</p><br></br>
+                        <p><strong><big><big>Preço:</big></big></strong> R${tutor.pricePerHour},00/hora</p><br></br>
+                        <p><strong><big><big>Descrição:</big></big></strong> {tutor.description}</p><br></br>
+                        <h2 onClick={() => sendMessage()}>Dúvidas? Fale comigo!</h2>
+                    </TutorInfo>
+                </TutorCointaner >
+                <BookingAndPaymentContainer>
+                    <BookingContainer>
+                        <h2>Primeira vez? Agende duas horas de aula e pague apenas uma!</h2>
+                        <BookingButton onClick={() => bookClass()}><h2>AGENDAR AULA</h2></BookingButton>
+                    </BookingContainer>
+                    {showPayment ?
+                        <PaymentContainer>
+                            <PaymentComponent />
+                        </PaymentContainer> : ""}
+                </BookingAndPaymentContainer>
+            </ScreenContainer>
+            ) :
+            <ScreenContainer>
+                <Header />
+            </ScreenContainer>)
     )
 }
 

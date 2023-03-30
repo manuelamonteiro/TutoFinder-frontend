@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
@@ -14,11 +13,12 @@ export default function SubjectsPage() {
 
     useEffect(() => {
         async function fetchData() {
-            const subjects = await getSubjects(token);
-            if (subjects.length === 0) {
+            try{
+                const subjects = await getSubjects(token);
+                setSubjects(subjects);
+            } catch(error){
                 toast("Erro inesperado!");
             }
-            setSubjects(subjects);
         }
 
         fetchData();

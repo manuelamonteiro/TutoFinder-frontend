@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function SubjectComponent({ name, id }) {
-
+    let navigate = useNavigate();
     return (
         <>
-            <Link to={`/tutors/${id}`}>
-                <Subject><p>{name}</p></Subject>
-            </Link>
+            <Subject onClick={() => navigate(`/tutors/${id}`)}><p>{name}</p></Subject>
         </>
     )
 }
@@ -19,6 +17,7 @@ const Subject = styled.div`
     background-color: #DCDCDC;
     height: 60px;
     border-radius: 10px;
+    cursor: pointer;
 
     p{
         text-decoration: none;;
