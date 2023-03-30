@@ -18,7 +18,7 @@ export default function Header() {
     return (
         <LogoContainer>
             <h1>TutoFinder</h1>
-            <BiArrowFromLeft size="32px" color="white" onClick={() => logout()} />
+            <BiArrowFromLeft size="32px" color="white" onClick={() => logout()} cursor="pointer"/>
         </LogoContainer>
     );
 }
