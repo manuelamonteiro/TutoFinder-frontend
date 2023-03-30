@@ -42,9 +42,9 @@ export default function TutorPage() {
     }
 
     return (
-        <>
+        <ScreenContainer>
             <Header />
-            <ScreenCointaner>
+            <TutorCointaner>
                 <TutorPicture>
                     <img src={tutor.picture} />
                 </TutorPicture>
@@ -54,7 +54,7 @@ export default function TutorPage() {
                     <p><strong><big><big>Descrição:</big></big></strong> {tutor.description}</p><br></br>
                     <h2 onClick={() => sendMessage()}>Dúvidas? Fale comigo!</h2>
                 </TutorInfo>
-            </ScreenCointaner >
+            </TutorCointaner >
             <BookingAndPaymentContainer>
                 <BookingContainer>
                     <h2>Primeira vez? Agende duas horas de aula e pague apenas uma!</h2>
@@ -65,52 +65,56 @@ export default function TutorPage() {
                         <PaymentComponent />
                     </PaymentContainer> : ""}
             </BookingAndPaymentContainer>
-        </>
+        </ScreenContainer>
     )
 }
 
-const ScreenCointaner = styled.div`
+const ScreenContainer = styled.div`
     width: 100vw;
+    height: 100vh;
+    background-color: #F5F5F5;
+`;
+
+const TutorCointaner = styled.div`
     display: flex;
     align-items: center;
     padding-top: 100px;
     padding-bottom: 30px;
-    background-color: #F5F5F5;
 
-    @media(max-width: 700px) {
-        flex-direction: column;
-    }
-
-    h2{
-        margin-top: 20px;
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 22px;
-        line-height: 24px;
-        cursor: pointer;
-
-        @media(max-width: 1150px) {
-            font-size: 20px;
+        @media(max-width: 700px) {
+            flex-direction: column;
         }
 
-        @media(max-width: 800px) {
-            font-size: 18px;
+        h2{
+            margin-top: 20px;
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 24px;
+            cursor: pointer;
+
+                @media(max-width: 1150px) {
+                    font-size: 20px;
+                }
+
+                @media(max-width: 800px) {
+                    font-size: 18px;
+                }
         }
-    }
 `;
 
 const TutorPicture = styled.div`
     padding-left: 15px;
 
-    @media(max-width: 700px) {
-        padding-left: 0;
-    }
+        @media(max-width: 700px) {
+            padding-left: 0;
+        }
 
-    img{
-        width: 250px;
-        border-radius: 10px;
-    }
+        img{
+            width: 250px;
+            border-radius: 10px;
+        }
 `;
 
 const TutorInfo = styled.div`
@@ -119,48 +123,46 @@ const TutorInfo = styled.div`
     padding-left: 15px;
     padding-right: 15px;
 
-    p{
-        text-align: justify;
-        overflow-wrap: break-word;
-        font-family: 'Roboto', sans-serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
+        p{
+            text-align: justify;
+            overflow-wrap: break-word;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
 
-        @media(max-width: 1150px) {
-            font-size: 14px;
+            @media(max-width: 1150px) {
+                font-size: 14px;
+            }
         }
-    }
 `;
 
 const BookingAndPaymentContainer = styled.div`
-    width: 100vw;
     padding-bottom: 30px;
-    background-color: #F5F5F5;
 
-    @media(max-width: 700px) {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    h2{
-        font-family: 'Raleway', sans-serif;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 22px;
-        line-height: 24px;
-
-        @media(max-width: 1150px) {
-            font-size: 20px;
+        @media(max-width: 700px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        @media(max-width: 800px) {
-            font-size: 18px;
+        h2{
+            font-family: 'Raleway', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 24px;
+
+                @media(max-width: 1150px) {
+                    font-size: 20px;
+                }
+
+                @media(max-width: 800px) {
+                    font-size: 18px;
+                }
         }
-    }
 `;
 
 const BookingContainer = styled.div`
