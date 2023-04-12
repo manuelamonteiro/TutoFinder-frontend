@@ -1,25 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { SubjectContainer } from "../assets/ComponentsContainers-style";
 
 export default function SubjectComponent({ name, id }) {
     let navigate = useNavigate();
     return (
         <>
-            <Subject onClick={() => navigate(`/tutors/${id}`)}><p>{name}</p></Subject>
+            <SubjectContainer onClick={() => navigate(`/tutors/${id}`)}><p>{name}</p></SubjectContainer>
         </>
     )
 }
-
-const Subject = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #DCDCDC;
-    height: 60px;
-    border-radius: 10px;
-    cursor: pointer;
-
-    p{
-        text-decoration: none;;
-    }
-`;

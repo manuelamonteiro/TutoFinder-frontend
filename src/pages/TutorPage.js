@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import { toast } from "react-toastify";
 
 import Header from "../components/Header";
@@ -8,6 +7,9 @@ import { getTutorInfo } from "../services/tutorsApi";
 import PaymentComponent from "../components/PaymentComponent";
 import { AuthContext } from "../contexts/AuthContext";
 import { createBooking } from "../services/bookingApi";
+import { ScreenContainer } from "../assets/ScreenContainers-style";
+import { TutorCointaner, BookingAndPaymentContainer } from "../assets/PrincipalContainers-style";
+import { TutorInfo, TutorPicture, BookingContainer, BookingButton, PaymentContainer } from "../assets/TutorPage-style";
 
 export default function TutorPage() {
     const { config: token } = useContext(AuthContext);
@@ -76,119 +78,3 @@ export default function TutorPage() {
             </ScreenContainer>)
     )
 }
-
-const ScreenContainer = styled.div`
-    width: 100vw;
-    height: 100vh;
-    background-color: #F5F5F5;
-`;
-
-const TutorCointaner = styled.div`
-    display: flex;
-    align-items: center;
-    padding-top: 100px;
-    padding-bottom: 30px;
-
-        @media(max-width: 700px) {
-            flex-direction: column;
-        }
-
-        h2{
-            margin-top: 20px;
-            font-family: 'Raleway', sans-serif;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 22px;
-            line-height: 24px;
-            cursor: pointer;
-
-                @media(max-width: 1150px) {
-                    font-size: 20px;
-                }
-
-                @media(max-width: 800px) {
-                    font-size: 18px;
-                }
-        }
-`;
-
-const TutorPicture = styled.div`
-    padding-left: 15px;
-
-        @media(max-width: 700px) {
-            padding-left: 0;
-        }
-
-        img{
-            width: 250px;
-            border-radius: 10px;
-        }
-`;
-
-const TutorInfo = styled.div`
-    margin-top: 25px;
-    margin-bottom: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
-
-        p{
-            text-align: justify;
-            overflow-wrap: break-word;
-            font-family: 'Roboto', sans-serif;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-
-            @media(max-width: 1150px) {
-                font-size: 14px;
-            }
-        }
-`;
-
-const BookingAndPaymentContainer = styled.div`
-    padding-bottom: 30px;
-
-        @media(max-width: 700px) {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h2{
-            font-family: 'Raleway', sans-serif;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 22px;
-            line-height: 24px;
-
-                @media(max-width: 1150px) {
-                    font-size: 20px;
-                }
-
-                @media(max-width: 800px) {
-                    font-size: 18px;
-                }
-        }
-`;
-
-const BookingContainer = styled.div`
-    padding-left: 15px;
-`;
-
-const BookingButton = styled.button`
-    background-color: #DCDCDC;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    height: 40px;
-    width: 200px;
-    margin-top: 15px;
-    border-radius: 10px;
-`;
-
-const PaymentContainer = styled.div`
-    display: flex;
-    padding-left: 15px;
-    margin-top: 25px;
-`;

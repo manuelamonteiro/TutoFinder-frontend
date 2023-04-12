@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { toast } from "react-toastify";
 import qs from "query-string";
 import axios from "axios";
@@ -9,6 +8,7 @@ import Logo from "../components/Logo";
 import AuthForm from "../components/AuthForm";
 import { signIn } from "../services/userApi";
 import { AuthContext } from "../contexts/AuthContext";
+import { ScreenCointanerSign } from "../assets/ScreenContainers-style";
 
 export default function SignInPage() {
     const navigate = useNavigate();
@@ -69,7 +69,7 @@ export default function SignInPage() {
     }, []);
 
     return (
-        <ScreenCointaner>
+        <ScreenCointanerSign>
             <Logo />
             <AuthForm>
                 <form onSubmit={submit}>
@@ -97,29 +97,6 @@ export default function SignInPage() {
 
                 <h2 onClick={() => navigate("/sign-up")}>Primeira vez? Cadastre-se!</h2>
             </AuthForm>
-        </ScreenCointaner >
+        </ScreenCointanerSign>
     )
 }
-
-const ScreenCointaner = styled.div`
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #F5F5F5;
-
-    h2{
-        font-family: 'Raleway', sans-serif; ;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 24px;
-        cursor: pointer;
-
-        @media(max-width: 600px) {
-            font-size: 16px;
-        }
-    }
-`;
