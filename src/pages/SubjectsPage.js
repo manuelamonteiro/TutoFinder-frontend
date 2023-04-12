@@ -13,10 +13,10 @@ export default function SubjectsPage() {
 
     useEffect(() => {
         async function fetchData() {
-            try{
+            try {
                 const subjects = await getSubjects(token);
                 setSubjects(subjects);
-            } catch(error){
+            } catch (error) {
                 toast("Erro inesperado!");
             }
         }
